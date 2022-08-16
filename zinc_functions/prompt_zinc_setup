@@ -170,7 +170,7 @@ prompt_zinc_setup () {
       _ZINC_DBG_OUT "loading preset $1"
       source "${_ZINC_0[repo]}/presets/${1}.zincp.zsh"
     else
-      echo "ZINC: No such preset found in ${_ZINC_0[repo]}/presets/."
+      echo "ZINC: No such preset <<$1>> found in ${_ZINC_0[repo]}/presets/."
     fi
   fi
 
