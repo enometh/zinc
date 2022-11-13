@@ -230,6 +230,7 @@ _DOW_N="0"
 
 zincs_time_fg () {
   strftime -s _DOW_N '%w' $EPOCHSECONDS
+  [[ ${_DOW_N} = "0" ]] && _DOW_N="7"
   idestykk_day_settings_${zincs_dowmap[${_DOW_N}]}
   REPLY="${TIME_FG}"
 }
@@ -250,7 +251,7 @@ zincs_colordowtime=(
 function zincs_colordowtime () {
   local _DOW
   strftime -s _DOW '%a' $EPOCHSECONDS
-  REPLY="${zincs_colordowtime[$_DOW]}"
+  REPLY="${zincs_colordowtime[$_DOW_N]}"
 }
 zincs_colordowtime_fg () {
   REPLY="${HOST_FG}"
