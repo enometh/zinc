@@ -1,0 +1,19 @@
+# -*- Shell-Script -*-
+
+function zincs_shlvl_async_started() {
+  zincs_shlvl_vcs[_info_msg_0_]="<loading>"
+  zincs_shlvl_vcs[_info_msg_1_]="<..>"
+  zincs_shlvl_vcs[_info_msg_2_]="<..>"
+}
+
+[[ "${(t)zincs_shlvl_vcs}" != "association" ]] && {
+  typeset -gA zincs_shlvl_vcs
+}
+
+function _zincs_shlvl_async_complete() {
+    _zinc_segment_async_reset_status zincs_shlvl
+}
+
+-zinc-add-hook _zinc_async_complete _zincs_shlvl_async_complete
+
+zincs_shlvl_async_started "$@"

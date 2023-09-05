@@ -1,0 +1,11 @@
+# -*- Shell-Script -*-
+function zincs_shlvl_async_return() {
+    local -a msg
+    msg=("${(s.;.)2}")
+    # _ZINC_DBG_OUT "MADHU: 2=$2 msg=$msg"
+    zincs_shlvl_vcs[_info_msg_0_]="${msg[1]}"
+    zincs_shlvl_vcs[_info_msg_1_]="${msg[2]}"
+    zincs_shlvl_vcs[_info_msg_2_]="${msg[3]}"
+}
+
+zincs_shlvl_async_return "$@"

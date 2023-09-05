@@ -1,0 +1,5 @@
+# -*- Shell-Script -*-
+
+function zincs_shlvl_default_opts() {
+    reply=(black white normal async);
+}

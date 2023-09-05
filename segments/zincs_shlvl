@@ -1,0 +1,50 @@
+# -*- Shell-Script -*-
+
+# synopsis {{{
+#
+# Author's idiosyncratic legacy complete two-line prompt using zsh
+# shell status formats, with an async call to Zsh's vcs_info to report
+# vcs status. Handles NOBOLD and NOVCS.  Colours are hardcoded for a
+# Black on White XTerm.
+#
+# }}}
+
+[[ "${(t)zincs_shlvl_vcs}" != "association" ]] && {
+  typeset -gA zincs_shlvl_vcs
+}
+
+function zincs_shlvl()
+{
+    REPLY=""
+    REPLY="${REPLY}%F{blue}[%D %T]%f"
+    REPLY="${REPLY}%F{red}(shlvl %L)%f"
+    REPLY="${REPLY}%F{blue}{%j jobs}%f"
+    REPLY="${REPLY}(%F{yellow}#%h%f)"
+    REPLY="${REPLY}%F{cyan}(%l)%f"
+
+    if [ -n "${zincs_shlvl_vcs[_info_msg_0_]}" ]; then
+	REPLY=$REPLY"[%F{magenta}${zincs_shlvl_vcs[_info_msg_0_]}%f]"
+    fi
+    if [ -n "${zincs_shlvl_vcs[_info_msg_1_]}" ]; then
+	REPLY=$REPLY"[%F{green}${zincs_shlvl_vcs[_info_msg_1_]}%f]"
+    fi
+    if [ -n "${zincs_shlvl_vcs[_info_msg_2_]}" ]; then
+	REPLY=$REPLY"[%F{red}${zincs_shlvl_vcs[_info_msg_2]}%f]"
+    fi
+
+    REPLY="${REPLY} %?"
+    REPLY=${REPLY}$'\n'
+
+    if [ -n "$CHROOT" ]; then
+	REPLY="${REPLY}%F{magenta}($CHROOT)%f "
+    fi
+    REPLY="${REPLY}%F{green}%n@%f%m "
+    REPLY="${REPLY}%F{blue}%~%f "
+    REPLY="${REPLY}%F{grey}%#%f "
+
+    if [ -z "$NOBOLD" ]; then
+	REPLY="%B${REPLY}%b"
+    fi
+}
+
+zincs_shlvl "$@"
