@@ -7,6 +7,9 @@
 # vcs status. Handles NOBOLD and NOVCS.  Colours are hardcoded for a
 # Black on White XTerm.
 #
+# NOTE: setting NOVCS=1 also requires `zinc_worker_restart' (or a
+# `zinc_restart') to take effect.
+
 # }}}
 
 [[ "${(t)zincs_shlvl_vcs}" != "association" ]] && {
